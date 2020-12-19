@@ -1,0 +1,53 @@
+import sqlite3
+con = sqlite3.connect('gw.db')
+c = con.cursor()
+sql_str = '''CREATE TABLE DEVICE(
+ID INTEGER PRIMARY KEY  NOT NULL,
+NAME    TEXT,
+INFO    TEXT,
+LIGHT   INTEGER,
+TEMP    REAL,
+HUM    REAL,
+ALARM  INTEGER
+);
+'''
+c.execute(sql_str)
+con.commit()
+con.close()
+
+import sqlite3
+con = sqlite3.connect('gw.db')
+c = con.cursor()
+sql_str = "INSERT INTO DEVICE VALUES(2,'soybean','greenhouse for soybean',1,28.5,45,0);"
+c.execute(sql_str)
+con.commit()
+con.close()
+
+
+import sqlite3
+con = sqlite3.connect('gw.db')
+c = con.cursor()
+sql_str = "SELECT * FROM DEVICE;"
+c.execute(sql_str)
+for row in c:
+    print(row)
+con.close()
+ 
+import sqlite3
+con = sqlite3.connect('gw.db')
+c = con.cursor()
+
+sql_select = "SELECT * FROM DEVICE;"
+print('Before Update:')
+c.execute(sql_select)
+for row in c:
+    print(row)
+
+sql_update = "UPDATE DEVICE SET LIGHT = 0 WHERE ID = 2;"
+c.execute(sql_update)
+con.commit()
+
+print('After Update:')
+c.execute(sql_select)
+for row in c:
+    print(row)
