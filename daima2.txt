@@ -1,0 +1,14 @@
+# coding=gbk
+#！ /user/bin/env python
+import sqlite3
+con = sqlite3.connect('collecttem.db')
+c = con.cursor()
+sql_str = '''
+CREATE TABLE DEVICE(
+ID INTEGER PRIMARY KEY       NOT NULL,
+temp      INTEGER
+);
+'''
+c.execute(sql_str)
+con.commit()
+con.close()
